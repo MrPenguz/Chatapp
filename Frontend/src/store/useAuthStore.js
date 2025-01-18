@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios.js";
 export const useAuthStore = create((set) => ({
   authUser: null,
-  isSIgningUp: false,
+  isSigningUp: false,
   isLoggingIn: false,
   isUpdatingProfile: false,
   isCheckingAuth: true,
@@ -17,4 +17,5 @@ export const useAuthStore = create((set) => ({
       set({ isCheckingAuth: false });
     }
   },
+  signup: async (data) => {},
 }));
