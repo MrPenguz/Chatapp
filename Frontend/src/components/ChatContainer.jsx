@@ -5,15 +5,24 @@ import MessageInput from "./MessageInput";
 import ChatHeader from "./ChatHeader";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
-import Message from "../../../Backend/src/models/message.model";
 import { formatMessageTime } from "../lib/utils";
 const ChatContainer = () => {
-  const { messages, getMessages, isMessagesLoading, selectedUser } =
-    useChatStore();
+  const {
+    messages,
+    getMessages,
+    isMessagesLoading,
+    selectedUser,
+    subToMessages,
+    unSubToMessages,
+  } = useChatStore();
   const { authUser } = useAuthStore();
   useEffect(() => {
     getMessages(selectedUser._id);
-  }, [selectedUser._id, getMessages]);
+    subToMessages();
+    return () => {
+      unSubToMessages();
+    };
+  }, [selectedUser._id, getMessages, subToMessages, unSubToMessages]);
   if (isMessagesLoading)
     return (
       <div className="flex-1 flex flex-col overflow-auto">
@@ -22,13 +31,11 @@ const ChatContainer = () => {
         <MessageInput />
       </div>
     );
-  console.log(messages);
   return (
     <div className="flex-1  flex flex-col overflow-auto">
       <ChatHeader />
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((messages) => {
-          console.log(messages.senderId);
           return (
             <div
               key={messages._id}
