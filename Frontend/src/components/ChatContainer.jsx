@@ -85,8 +85,8 @@ const ChatContainer = () => {
                   <p
                     className={` ${
                       messages.senderId === authUser._id
-                        ? "text-primary-content"
-                        : ""
+                        ? "bg-primary text-primary-content"
+                        : "text-secondary-content"
                     } }`}
                   >
                     {messages.text}
