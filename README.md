@@ -19,3 +19,21 @@ A real-time chat application with authentication, messaging, and image sharing c
 - **Authentication:** JWT + Cookies
 
 ## 🔧 Installation & Setup
+
+This project requires several environment variables to be set up in the `.env` file for the backend.
+
+## 🧰 Required Environment Variables
+
+Below are the variables you need to add to your `.env` file:
+
+### **Database Configuration**
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+JWT_SECRET=your_jwt_secret_key
+PORT=5001
+NODE_ENV=development
+```
