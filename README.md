@@ -24,7 +24,7 @@ This project requires several environment variables to be set up in the `.env` f
 
 ## 🧰 Required Environment Variables
 
-Below are the variables you need to add to your `.env` file:
+Below are the variables you need to add to your `.env` file make one in /Backend:
 
 ### **Database Configuration**
 
@@ -36,4 +36,22 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 JWT_SECRET=your_jwt_secret_key
 PORT=5001
 NODE_ENV=development
+```
+
+### **Build The App**
+
+```
+npm run build
+```
+
+### **Start The App (for production)**
+
+```
+npm start
+```
+
+### **Start The App (for development)**
+
+```
+npm run dev
 ```
