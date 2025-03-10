@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useEffect } from "react";
 import MessageInput from "./MessageInput";
@@ -16,6 +16,7 @@ const ChatContainer = () => {
     unSubToMessages,
   } = useChatStore();
   const { authUser } = useAuthStore();
+  const messageEndRef = useRef(null);
   useEffect(() => {
     getMessages(selectedUser._id);
     subToMessages();
@@ -23,6 +24,11 @@ const ChatContainer = () => {
       unSubToMessages();
     };
   }, [selectedUser._id, getMessages, subToMessages, unSubToMessages]);
+  useEffect(() => {
+    if (messageEndRef.current && messages) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
   if (isMessagesLoading)
     return (
       <div className="flex-1 flex flex-col overflow-auto">
@@ -40,8 +46,9 @@ const ChatContainer = () => {
             <div
               key={messages._id}
               className={`chat ${
-                messages.senderId === authUser._id ? "chat-end" : "chat-start"
+                messages.senderId === authUser._id ? "chat-end" : "chat-start "
               }`}
+              ref={messageEndRef}
             >
               <div className="chat-image avatar">
                 <div className="size-10 rounded-full border">
@@ -60,7 +67,13 @@ const ChatContainer = () => {
                   {formatMessageTime(messages.createdAt)}
                 </time>
               </div>
-              <div className="chat-bubble flex flex-col">
+              <div
+                className={`chat-bubble ${
+                  messages.senderId === authUser._id
+                    ? "bg-primary"
+                    : "bg-base-200"
+                } flex flex-col`}
+              >
                 {messages.image && (
                   <img
                     src={messages.image}
@@ -68,7 +81,17 @@ const ChatContainer = () => {
                     className="sm:max-w-[200px] rounded-md mb-2"
                   />
                 )}
-                {messages.text && <p>{messages.text}</p>}
+                {messages.text && (
+                  <p
+                    className={` ${
+                      messages.senderId === authUser._id
+                        ? "text-primary-content"
+                        : ""
+                    } }`}
+                  >
+                    {messages.text}
+                  </p>
+                )}
               </div>
             </div>
           );
