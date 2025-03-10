@@ -1,6 +1,7 @@
 # 💬 Pengu Chat
 
 A real-time chat application with authentication, messaging, and image sharing capabilities. Built using **React, Express, Socket.io, and MongoDB**.
+![Chat Interface](https://i.imgur.com/L9pmJtk.png)
 
 ## 🚀 Features
 
